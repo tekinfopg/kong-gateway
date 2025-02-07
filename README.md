@@ -1,57 +1,96 @@
-# Kong Gateway with Docker Compose
+# Kong Gateway Docker Compose Setup
 
-# Configuration Parameters
+This repository provides a Docker Compose configuration for running Kong Gateway along with its migrations. The configuration is defined in the [docker-compose.yml](docker-compose.yml) file.
 
-You can override the following environment variables in your setup:
+## Configuration
 
-- **KONG_DATABASE**
-  - *Description:* Determines which database backend Kong will use.
-  - *Default:* `off`
+The Compose file uses a YAML anchor (`x-kong-config: &kong-env`) to define a common set of environment variables for Kong. You can override these variables as needed.
 
-- **KONG_PG_DATABASE**
-  - *Description:* The PostgreSQL database name for Kong.
-  - *Default:* `kong`
+### Environment Variables
 
-- **KONG_PG_HOST**
-  - *Description:* Hostname of the PostgreSQL server.
-  - *Default:* `db`
+- **KONG_DATABASE**  
+  - _Usage_: Sets the type of database to use by Kong.  
+  - _Default_: `postgres`  
+  - _Example_: `export KONG_DATABASE=postgres`
 
-- **KONG_PG_USER**
-  - *Description:* PostgreSQL username for Kong.
-  - *Default:* `kong`
+- **KONG_PG_DATABASE**  
+  - _Usage_: The name of the PostgreSQL database Kong will connect to.  
+  - _Default_: `kong`  
+  - _Example_: `export KONG_PG_DATABASE=kong`
 
-- **KONG_PG_PASSWORD_FILE**
-  - *Description:* Path to a file that contains the PostgreSQL password.
-  - *Default:* `/run/secrets/kong_postgres_password`
+- **KONG_PG_HOST**  
+  - _Usage_: The hostname or IP address of your external PostgreSQL server.  
+  - _Default_: `your-external-db-host`  
+  - _Example_: `export KONG_PG_HOST=192.168.1.100`
 
-Other parameters used in the Kong service configuration include:
+- **KONG_PG_USER**  
+  - _Usage_: The PostgreSQL username for connecting to the database.  
+  - _Default_: `kong`  
+  - _Example_: `export KONG_PG_USER=kong`
 
-- **KONG_PROXY_LISTEN**
-  - *Description:* IP and port that Kong listens on for proxy traffic.
-  - *Default:* `0.0.0.0:8000`
+- **KONG_PG_PASSWORD**  
+  - _Usage_: The PostgreSQL password for the user.  
+  - _Default_: `your-db-password`  
+  - _Example_: `export KONG_PG_PASSWORD=secretpass`
 
-- **KONG_ADMIN_LISTEN**
-  - *Description:* IP and port that Kong listens on for admin API traffic.
-  - *Default:* `0.0.0.0:8001`
+### Kong Service Specific Variables
 
-- **KONG_ADMIN_GUI_LISTEN**
-  - *Description:* IP and port that Kong listens on for admin GUI traffic.
-  - *Default:* `0.0.0.0:8002`
+Additional settings for the Kong container include:
 
-- **KONG_ADMIN_ACCESS_LOG** and **KONG_ADMIN_ERROR_LOG**
-  - *Description:* Log paths for the admin API.
-  - *Default:* `/dev/stdout` and `/dev/stderr`, respectively.
+- **KONG_ADMIN_ACCESS_LOG** and **KONG_ADMIN_ERROR_LOG**  
+  - _Usage_: Paths for the admin access and error logs.  
+  - _Default_: `/dev/stdout` and `/dev/stderr`, respectively.
 
-- **KONG_PROXY_ACCESS_LOG** and **KONG_PROXY_ERROR_LOG**
-  - *Description:* Log paths for proxy traffic.
-  - *Default:* `/dev/stdout` and `/dev/stderr`, respectively.
+- **KONG_PROXY_LISTEN**  
+  - _Usage_: Address (IP and port) for Kong to listen on for proxy traffic.  
+  - _Default_: `0.0.0.0:8000`
 
-- **KONG_PREFIX**
-  - *Description:* Kong's working directory.
-  - *Default:* `/var/run/kong`
+- **KONG_ADMIN_LISTEN**  
+  - _Usage_: Address for Kong to listen on for the Admin API.  
+  - _Default_: `0.0.0.0:8001`
 
-- **KONG_DECLARATIVE_CONFIG**
-  - *Description:* Path to Kong's declarative configuration file.
-  - *Default:* `/opt/kong/kong.yaml`
+- **KONG_ADMIN_GUI_LISTEN**  
+  - _Usage_: Address for Kong to listen on for the Admin GUI.  
+  - _Default_: `0.0.0.0:8002`
 
-Feel free to adjust these parameters to suit your environment.
+- **KONG_PROXY_ACCESS_LOG** and **KONG_PROXY_ERROR_LOG**  
+  - _Usage_: Paths for the proxy access and error logs.  
+  - _Default_: `/dev/stdout` and `/dev/stderr`
+
+- **KONG_PREFIX**  
+  - _Usage_: Kong's working directory.  
+  - _Default_: `/var/run/kong`
+
+- **KONG_DECLARATIVE_CONFIG**  
+  - _Usage_: Location of the declarative configuration file for Kong.  
+  - _Default_: `/opt/kong/kong.yaml`
+
+## Services
+
+The Compose file defines three primary services:
+
+- **kong-migrations**  
+  Runs the command `kong migrations bootstrap` to initialize the database schema.  
+  It uses the shared environment from the YAML anchor (`*kong-env`) and connects to the network `kong-net`.
+
+- **kong-migrations-up**  
+  Runs `kong migrations up && kong migrations finish` to apply further database migrations if needed.
+
+- **kong**  
+  Runs the Kong Gateway container. It also applies several additional environment variables and port mappings:
+  - **Ports:**  
+    - Proxy: `${KONG_INBOUND_PROXY_LISTEN:-0.0.0.0}:8000`  
+    - SSL Proxy: `${KONG_INBOUND_SSL_PROXY_LISTEN:-0.0.0.0}:8443`  
+    - Admin API: `8001`  
+    - Extra Admin API: `8444`  
+    - Admin GUI: `8002`
+  - **Health Check:** Uses `kong health` command with a 10-second interval, timeout, and 10 retries.
+  - **Volumes:** Mounts for persisting Kong's prefix and temporary files, as well as loading configuration files from the local `./config` directory.
+
+## Using an External Database
+
+To use an external PostgreSQL database instead of an internal one, update the environment variables before starting Docker Compose:
+
+```sh
+export KONG_PG_HOST=your.external.db.host
+export KONG_PG_PASSWORD=your-db-password
