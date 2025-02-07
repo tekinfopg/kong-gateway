@@ -1,0 +1,29 @@
+services:
+  kong-gateway:
+    container_name: kong-gateway
+    image: kong:3.9.0
+    ports:
+      - "8000:8000" # HTTP
+      - "8001:8001" # Admin API CLI
+      - "8002:8002" # Admin API GUI
+    depends_on:
+      - kong-database
+    environment:
+      - DB_HOST=kong-database
+      - REDIS_HOST=redis
+    restart: on-failure
+
+  kong-database:
+    image: postgres:14.15-alpine3.21
+    container_name: kong-database
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+      
+volumes:
+  postgres_data:
