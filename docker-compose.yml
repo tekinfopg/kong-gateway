@@ -56,10 +56,10 @@ services:
       KONG_PROXY_ERROR_LOG: /dev/stderr
       KONG_PREFIX: ${KONG_PREFIX:-/var/run/kong}
       KONG_DECLARATIVE_CONFIG: "/opt/kong/kong.yaml"
-      KONG_ADMIN_GUI_SSL_CERT: "/certs/${CERT_FILE:-fullchain.pem}"
-      KONG_ADMIN_GUI_SSL_CERT_KEY: "/certs/${CERT_KEY_FILE:-privkey.pem}"
-      KONG_ADMIN_SSL_CERT: "/certs/${CERT_FILE:-fullchain.pem}"
-      KONG_ADMIN_SSL_CERT_KEY: "/certs/${CERT_KEY_FILE:-privkey.pem}"
+      KONG_ADMIN_GUI_SSL_CERT: "${CERT_FILE:-}"
+      KONG_ADMIN_GUI_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
+      KONG_ADMIN_SSL_CERT: "${CERT_FILE:-}"
+      KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
       - kong-net
     ports:
