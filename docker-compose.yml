@@ -91,7 +91,7 @@ services:
     networks:
       - kong-net
     ports:
-      - 1337:1337
+      - ${KONGA_LISTEN:-1337}:1337
     restart: on-failure
     depends_on:
       - kong
