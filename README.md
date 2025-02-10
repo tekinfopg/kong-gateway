@@ -34,25 +34,26 @@ This repository contains a Docker Compose configuration to run Kong Gateway alon
 
 The .env.example file includes many variables that determine the behavior of your Kong Gateway setup. You can override these variables by updating your local .env file.
 
-| Variable                     | Description                                           | Default Value               |
-| ---------------------------- | ----------------------------------------------------- | --------------------------- |
-| `KONG_PG_HOST`               | Hostname or IP address of the PostgreSQL server.      | `host.docker.internal`      |
-| `KONG_PG_USER`               | PostgreSQL username for connecting to the database.   | `root`                      |
-| `KONG_DATABASE`              | The type of database used by Kong.                    | `postgres`                  |
-| `KONG_PG_PASSWORD`           | Password for the PostgreSQL user.                    | `1234`                      |
-| `KONG_PG_DATABASE`           | Name of the PostgreSQL database for Kong.            | `kong`                      |
-| `KONG_DOCKER_TAG`            | Docker image tag for Kong.                           | `kong:latest`               |
-| `KONG_USER`                  | User used to run the Kong container.                 | `kong`                      |
-| `KONG_PROXY_LISTEN`          | Port for proxy traffic.                              | `8000`                      |
-| `KONG_ADMIN_LISTEN`          | Port for the Admin API.                              | `8001`                      |
-| `KONG_ADMIN_GUI_LISTEN`      | Port for the Admin GUI.                              | `8002`                      |
-| `KONG_SSL_PROXY_LISTEN`      | Port for SSL proxy traffic.                          | `8443`                      |
-| `KONG_SSL_ADMIN_LISTEN`      | Port for SSL Admin API traffic.                      | `8444`                      |
-| `KONG_SSL_ADMIN_GUI_LISTEN`  | Port for SSL Admin GUI traffic.                      | `8445`                      |
-| `KONG_PREFIX`                | Kong's working directory inside the container.       | `/var/run/kong`             |
-| `KONG_CERT_DIR`              | Directory containing SSL certificates.             | certs                   |
-| `CERT_FILE`                  | Path to the SSL certificate file.                  | cert.pem          |
-| `CERT_KEY_FILE`              | Path to the SSL certificate key file.              | key.pem           |
+| Variable                    | Description                                         | Default Value          |
+| --------------------------- | --------------------------------------------------- | ---------------------- |
+| `KONG_PG_HOST`              | Hostname or IP address of the PostgreSQL server.    | `host.docker.internal` |
+| `KONG_PG_USER`              | PostgreSQL username for connecting to the database. | `root`                 |
+| `KONG_DATABASE`             | The type of database used by Kong.                  | `postgres`             |
+| `KONG_PG_PASSWORD`          | Password for the PostgreSQL user.                   | `1234`                 |
+| `KONG_PG_DATABASE`          | Name of the PostgreSQL database for Kong.           | `kong`                 |
+| `KONG_DOCKER_TAG`           | Docker image tag for Kong.                          | `kong:latest`          |
+| `KONG_USER`                 | User used to run the Kong container.                | `kong`                 |
+| `KONG_PROXY_LISTEN`         | Port for proxy traffic.                             | `8000`                 |
+| `KONG_ADMIN_LISTEN`         | Port for the Admin API.                             | `8001`                 |
+| `KONG_ADMIN_GUI_LISTEN`     | Port for the Admin GUI.                             | `8002`                 |
+| `KONG_SSL_PROXY_LISTEN`     | Port for SSL proxy traffic.                         | `8443`                 |
+| `KONG_SSL_ADMIN_LISTEN`     | Port for SSL Admin API traffic.                     | `8444`                 |
+| `KONG_SSL_ADMIN_GUI_LISTEN` | Port for SSL Admin GUI traffic.                     | `8445`                 |
+| `KONG_PREFIX`               | Kong's working directory inside the container.      | `/var/run/kong`        |
+| `KONG_CERT_DIR`             | Directory containing SSL certificates.              | `null`                 |
+| `CERT_FILE`                 | Path to the SSL certificate file.                   | `null`                 |
+| `CERT_KEY_FILE`             | Path to the SSL certificate key file.               | `null`                 |
+| `KONGA_LISTEN`              | Port for the Admin GUI konga                        | `1337`                 |
 
 ## Using an External Database
 
@@ -90,16 +91,16 @@ The Docker Compose configuration defines the following main services:
 
 - **Environment Variables:**  
   Ensure that variables in your .env file are correctly set.
-  
 - **Database Connections:**  
   Check the values for `KONG_PG_HOST`, `KONG_PG_USER`, and `KONG_PG_PASSWORD` if the connection to your PostgreSQL database fails.
-  
 - **Logs:**  
   Use `docker-compose logs -f kong` to monitor error messages and detailed logs.
 
 ---
 
 This documentation provides a basic guide for setting up and running Kong Gateway with Docker Compose. Feel free to customize the configuration and documentation as needed for your environment.
-``` 
+
+```
 
 This README explains the setup process, elaborates on environment configuration, and details how to switch between an external and internal database for Kong Gateway.
+```
