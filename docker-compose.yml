@@ -83,3 +83,15 @@ services:
       - ${KONG_CERT_DIR:-./certs}:/certs
     security_opt:
       - no-new-privileges
+  konga:
+    container_name: konga
+    image: pantsel/konga
+    environment:
+      - NODE_ENV=production
+    networks:
+      - kong-net
+    ports:
+      - 1337:1337
+    restart: on-failure
+    depends_on:
+      - kong
