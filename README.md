@@ -45,10 +45,8 @@ The .env.example file includes many variables that determine the behavior of you
 | `KONG_USER`                 | User used to run the Kong container.                | `kong`                 |
 | `KONG_PROXY_LISTEN`         | Port for proxy traffic.                             | `8000`                 |
 | `KONG_ADMIN_LISTEN`         | Port for the Admin API.                             | `8001`                 |
-| `KONG_ADMIN_GUI_LISTEN`     | Port for the Admin GUI.                             | `8002`                 |
 | `KONG_SSL_PROXY_LISTEN`     | Port for SSL proxy traffic.                         | `8443`                 |
 | `KONG_SSL_ADMIN_LISTEN`     | Port for SSL Admin API traffic.                     | `8444`                 |
-| `KONG_SSL_ADMIN_GUI_LISTEN` | Port for SSL Admin GUI traffic.                     | `8445`                 |
 | `KONG_PREFIX`               | Kong's working directory inside the container.      | `/var/run/kong`        |
 | `KONG_CERT_DIR`             | Directory containing SSL certificates.              | `null`                 |
 | `CERT_FILE`                 | Path to the SSL certificate file.                   | `null`                 |
