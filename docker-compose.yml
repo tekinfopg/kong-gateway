@@ -90,6 +90,8 @@ services:
   konga:
     container_name: konga
     image: pantsel/konga
+    profiles:
+      - konga
     environment:
       - NODE_ENV=development
     networks:
@@ -121,6 +123,7 @@ services:
     environment:
       KC_HOSTNAME: ${KC_HOSTNAME:-localhost}
       KC_HOSTNAME_PORT: 8080
+      KC_HTTPS_PORT: ${KC_PORT}
       KC_HOSTNAME_STRICT_BACKCHANNEL: false
       KC_HTTP_ENABLED: ${KC_HTTP_ENABLED}
       KC_HOSTNAME_STRICT_HTTPS: ${KC_HOSTNAME_STRICT_HTTPS}
@@ -134,7 +137,7 @@ services:
       KC_HTTPS_CERTIFICATE_FILE: ${KC_HTTPS_CERTIFICATE_FILE}
       KC_HTTPS_CERTIFICATE_KEY_FILE: ${KC_HTTPS_CERTIFICATE_KEY_FILE}
     ports:
-      - ${KC_PORT:-8080}:8080
+      - ${KC_PORT}:${KC_PORT}
     restart: always
     volumes:
       - ${KC_CERT_DIR:-./certs}:/certs
