@@ -90,8 +90,6 @@ services:
   konga:
     container_name: konga
     image: pantsel/konga
-    profiles:
-      - konga
     environment:
       - NODE_ENV=development
     networks:
