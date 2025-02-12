@@ -36,12 +36,14 @@ services:
   kong-migrations-up:
     container_name: kong-migrations-up
     image: "${KONG_DOCKER_TAG:-kong:latest}"
-    command: kong migrations up && kong migrations finish
+    command: kong migrations up
     environment:
       <<: *kong-env
     networks:
       - kong-net
     restart: on-failure
+    depends_on:
+      - kong-migrations
 
   kong:
     container_name: kong
@@ -101,6 +103,7 @@ services:
       - kong
 
   keycloak-db:
+    container_name: keycloak-db
     image: postgres:14.15-alpine3.21
     volumes:
       - keycloak-datastore:/var/lib/postgresql/data
@@ -114,6 +117,7 @@ services:
   keycloak:
     image: keycloak/keycloak:latest
     command: start
+    container_name: keycloak
     environment:
       KC_HOSTNAME: ${KC_HOSTNAME:-localhost}
       KC_HOSTNAME_PORT: 8080
