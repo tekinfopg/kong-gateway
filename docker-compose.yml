@@ -15,6 +15,8 @@ volumes:
     driver_opts:
       type: tmpfs
       device: tmpfs
+  konga_data: {}
+  keycloak-datastore: {}
 
 networks:
   kong-net:
@@ -93,5 +95,42 @@ services:
     ports:
       - ${KONGA_LISTEN:-1337}:1337
     restart: on-failure
+    volumes:
+      - konga_data:/app/kongadata
     depends_on:
       - kong
+
+  keycloak-db:
+    image: postgres:14.15-alpine3.21
+    volumes:
+      - keycloak-datastore:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${KC_POSTGRES_DB}
+      POSTGRES_USER: ${KC_POSTGRES_USER}
+      POSTGRES_PASSWORD: ${KC_POSTGRES_PASSWORD}
+    networks:
+      - kong-net
+
+  keycloak:
+    image: keycloak/keycloak:latest
+    command: start
+    environment:
+      KC_HOSTNAME: localhost
+      KC_HOSTNAME_PORT: 8080
+      KC_HOSTNAME_STRICT_BACKCHANNEL: false
+      KC_HTTP_ENABLED: true
+      KC_HOSTNAME_STRICT_HTTPS: false
+      KC_HEALTH_ENABLED: true
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://${KC_DB_URL:-keycloak-db}/${POSTGRES_DB}
+      KC_DB_USERNAME: ${KC_POSTGRES_USER}
+      KC_DB_PASSWORD: ${KC_POSTGRES_PASSWORD}
+    ports:
+      - ${KC_PORT:-8080}:8080
+    restart: always
+    depends_on:
+      - postgres
+    networks:
+      - kong-net
