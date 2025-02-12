@@ -21,6 +21,9 @@ volumes:
 networks:
   kong-net:
     driver: bridge
+  proxy:
+    name: proxy
+    external: true
 
 services:
   kong-migrations:
@@ -66,6 +69,7 @@ services:
       KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
       - kong-net
+      - proxy
     ports:
       - ${KONG_PROXY_LISTEN:-8000}:${KONG_PROXY_LISTEN:-8000}
       # - ${KONG_ADMIN_LISTEN:-8001}:${KONG_ADMIN_LISTEN:-8001}
@@ -94,6 +98,7 @@ services:
       - NODE_ENV=development
     networks:
       - kong-net
+      - proxy
     ports:
       - ${KONGA_LISTEN:-1337}:1337
     restart: on-failure
@@ -101,18 +106,6 @@ services:
       - konga_data:/app/kongadata
     depends_on:
       - kong
-
-  keycloak-db:
-    container_name: keycloak-db
-    image: postgres:14.15-alpine3.21
-    volumes:
-      - keycloak-datastore:/var/lib/postgresql/data
-    environment:
-      POSTGRES_DB: ${KC_POSTGRES_DB}
-      POSTGRES_USER: ${KC_POSTGRES_USER}
-      POSTGRES_PASSWORD: ${KC_POSTGRES_PASSWORD}
-    networks:
-      - kong-net
 
   keycloak:
     image: keycloak/keycloak:latest
@@ -144,3 +137,4 @@ services:
       - kong
     networks:
       - kong-net
+      - proxy
