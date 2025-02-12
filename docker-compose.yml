@@ -124,7 +124,7 @@ services:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
       KC_DB: postgres
-      KC_DB_URL: jdbc:postgresql://${KC_DB_URL:-keycloak-db}/${POSTGRES_DB}
+      KC_DB_URL: jdbc:postgresql://${KC_DB_URL:-keycloak-db}/${KC_POSTGRES_DB}
       KC_DB_USERNAME: ${KC_POSTGRES_USER}
       KC_DB_PASSWORD: ${KC_POSTGRES_PASSWORD}
     ports:
