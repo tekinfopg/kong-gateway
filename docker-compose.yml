@@ -131,6 +131,6 @@ services:
       - ${KC_PORT:-8080}:8080
     restart: always
     depends_on:
-      - postgres
+      - kong
     networks:
       - kong-net
