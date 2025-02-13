@@ -125,7 +125,7 @@ services:
 
   keycloak:
     image: keycloak/keycloak:latest
-    command: start
+    command: start-dev
     container_name: keycloak
     environment:
       <<: *keycloak-env
