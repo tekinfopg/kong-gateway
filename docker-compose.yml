@@ -20,7 +20,8 @@ x-keycloak-config: &keycloak-env
   KC_HTTPS_CERTIFICATE_KEY_FILE: ${KC_HTTPS_CERTIFICATE_KEY_FILE}
   KC_HOSTNAME_STRICT: ${KC_HOSTNAME_STRICT:-true}
   KC_PROXY_HEADER: ${KC_PROXY_HEADER:-xforwarded}
-
+  TZ: ${TZ:-Asia/Jakarta}
+  
 volumes:
   kong_data: {}
   kong_prefix_vol:
