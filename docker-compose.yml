@@ -34,6 +34,7 @@ volumes:
       device: tmpfs
   konga_data: {}
   keycloak-datastore: {}
+  redis-datastore: {}
 
 networks:
   kong-net:
@@ -141,3 +142,10 @@ services:
     networks:
       - kong-net
       - proxy
+  kong-redis:
+    image: redis:alpine3.21
+    container_name: redis
+    networks:
+      - kong-net
+    volumes:
+      - redis-datastore:/data
