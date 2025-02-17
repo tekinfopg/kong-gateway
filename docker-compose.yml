@@ -45,6 +45,8 @@ networks:
 
 services:
   kong-migrations:
+    profiles:
+      - migration
     container_name: kong-migrations
     image: "${KONG_DOCKER_TAG:-kong:latest}"
     command: kong migrations bootstrap
@@ -55,6 +57,8 @@ services:
     restart: on-failure:5
 
   kong-migrations-up:
+    profiles:
+      - migration  
     container_name: kong-migrations-up
     image: "${KONG_DOCKER_TAG:-kong:latest}"
     command: kong migrations up
