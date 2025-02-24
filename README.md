@@ -87,6 +87,8 @@ The Docker Compose configuration defines the following main services:
 
 ## Troubleshooting
 
+- **Token Manager:**  
+  Redis is required if you need to use `Token Manager` Plugin. ensure redis host is `kong-redis`.
 - **Environment Variables:**  
   Ensure that variables in your .env file are correctly set.
 - **Database Connections:**  
