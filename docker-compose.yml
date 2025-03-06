@@ -141,6 +141,7 @@ services:
     restart: always
     volumes:
       - ${KC_CERT_DIR:-./certs}:/certs
+      - ./keycloak-providers:/opt/keycloak/providers/
     depends_on:
       - kong
     networks:
@@ -153,4 +154,3 @@ services:
       - kong-net
     volumes:
       - redis-datastore:/data
-      - ./keycloak-providers:/opt/keycloak/providers/
