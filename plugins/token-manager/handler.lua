@@ -48,7 +48,7 @@ local cjson = require "cjson"
 local redis = require "resty.redis"
 
 local TokenManagerPlugin = {
-    PRIORITY = 1000,
+    PRIORITY = 802,
     VERSION = "0.1"
 }
 
