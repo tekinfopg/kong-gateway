@@ -153,3 +153,4 @@ services:
       - kong-net
     volumes:
       - redis-datastore:/data
+      - ./keycloak-providers:/opt/keycloak/providers/
