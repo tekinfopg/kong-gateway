@@ -140,8 +140,8 @@ services:
       - ${KC_HTTP_PORT}:${KC_HTTP_PORT}
     restart: always
     volumes:
-      - ${KC_CERT_DIR:-./certs}:/certs
       - ./keycloak-providers:/opt/keycloak/providers/
+      - ${KC_CERT_DIR:-./certs}:/certs
     depends_on:
       - kong
     networks:
