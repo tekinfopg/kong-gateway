@@ -144,6 +144,7 @@ services:
     restart: always
     volumes:
       - ${KC_PROVIDER_DIR:-./keycloak-providers}:/opt/keycloak/providers/
+      - ${KC_THEMES_DIR:-./keycloak-themes/onekey-theme}:/opt/keycloak/themes/onekey-theme:ro
       - ${KC_CERT_DIR:-./certs}:/certs
     depends_on:
       - kong
