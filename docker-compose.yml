@@ -23,7 +23,7 @@ x-keycloak-config: &keycloak-env
   TZ: ${TZ:-Asia/Jakarta}
   WEBHOOK_URL : ${WEBHOOK_URL}
   PROXY_ADDRESS_FORWARDING: true
-  # KC_PROXY_HEADERS: ${KC_PROXY_HEADERS:-xforwarded}
+  KC_PROXY_HEADERS: ${KC_PROXY_HEADERS:-xforwarded}
   
 volumes:
   kong_data: {}
