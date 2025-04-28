@@ -24,6 +24,7 @@ x-keycloak-config: &keycloak-env
   WEBHOOK_URL : ${WEBHOOK_URL}
   PROXY_ADDRESS_FORWARDING: true
   KC_PROXY_HEADERS: ${KC_PROXY_HEADERS:-xforwarded}
+  LOG_ACTIVITY_KEY: ${LOG_ACTIVITY_KEY}
   
 volumes:
   kong_data: {}
