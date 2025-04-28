@@ -24,8 +24,8 @@
                 <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
               </svg>
             </div>
-            <input id="firstName" name="firstName" type="text" value="${(register.formData.firstName!'')}" 
-                   placeholder="Enter your first name"
+<input id="firstName" name="firstName" type="text" value="${(register.formData.firstName!'')}" 
+                   placeholder="Masukkan nama depan Anda"
                    aria-invalid="<#if messagesPerField.existsError('firstName')>true</#if>"
                    class="input-focus-effect pl-10 block w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 focus:border-secondary dark:focus:border-accent focus:outline-none transition-all" />
           </div>
@@ -46,8 +46,8 @@
                 <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" />
               </svg>
             </div>
-            <input id="lastName" name="lastName" type="text" value="${(register.formData.lastName!'')}" 
-                   placeholder="Enter your last name"
+<input id="lastName" name="lastName" type="text" value="${(register.formData.lastName!'')}" 
+                   placeholder="Masukkan nama belakang Anda"
                    aria-invalid="<#if messagesPerField.existsError('lastName')>true</#if>"
                    class="input-focus-effect pl-10 block w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 focus:border-secondary dark:focus:border-accent focus:outline-none transition-all" />
           </div>
@@ -70,8 +70,8 @@
               <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
             </svg>
           </div>
-          <input id="email" name="email" type="email" value="${(register.formData.email!'')}" 
-                 placeholder="Enter your email address"
+<input id="email" name="email" type="email" value="${(register.formData.email!'')}" 
+                 placeholder="Masukkan alamat email Anda"
                  aria-invalid="<#if messagesPerField.existsError('email')>true</#if>"
                  class="input-focus-effect pl-10 block w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 focus:border-secondary dark:focus:border-accent focus:outline-none transition-all" />
           <!-- Email tooltip -->
@@ -79,7 +79,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
             </svg>
-            <span class="tooltip-text">We'll send a verification email to this address</span>
+            <span class="tooltip-text">Kami akan mengirim email verifikasi ke alamat ini</span>
           </div>
         </div>
         <#if messagesPerField.existsError('email')>
@@ -99,8 +99,8 @@
               <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
             </svg>
           </div>
-          <input id="username" name="username" type="text" value="${(register.formData.username!'')}" 
-                 placeholder="Choose your username"
+<input id="username" name="username" type="text" value="${(register.formData.username!'')}" 
+                 placeholder="Pilih nama pengguna Anda"
                  aria-invalid="<#if messagesPerField.existsError('username')>true</#if>"
                  class="input-focus-effect pl-10 block w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 focus:border-secondary dark:focus:border-accent focus:outline-none transition-all" />
           <!-- Username tooltip -->
@@ -108,7 +108,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 dark:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
             </svg>
-            <span class="tooltip-text">Use only letters, numbers, and underscores</span>
+            <span class="tooltip-text">Gunakan hanya huruf, angka, dan garis bawah</span>
           </div>
         </div>
         <#if messagesPerField.existsError('username')>
@@ -128,8 +128,8 @@
               <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
             </svg>
           </div>
-          <input id="password" name="password" type="password" 
-                 placeholder="Create a password"
+<input id="password" name="password" type="password" 
+                 placeholder="Buat kata sandi"
                  aria-invalid="<#if messagesPerField.existsError('password')>true</#if>"
                  class="input-focus-effect pl-10 block w-full px-4 py-3 rounded-lg bg-white/50 dark:bg-gray-800/50 text-gray-700 dark:text-white border border-gray-300 dark:border-gray-600 focus:border-secondary dark:focus:border-accent focus:outline-none transition-all" />
           <!-- Toggle password visibility button -->
@@ -145,18 +145,18 @@
         </div>
         
         <!-- Password tooltip -->
-        <div class="mt-2 flex justify-between items-center">
-          <div class="text-xs text-gray-500 dark:text-gray-400">Password must include:</div>
+<div class="mt-2 flex justify-between items-center">
+          <div class="text-xs text-gray-500 dark:text-gray-400">Kata sandi harus mencakup:</div>
           <div class="tooltip relative">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 dark:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
             </svg>
             <span class="tooltip-text">
               <ul class="text-xs text-left">
-                <li>• Min. 8 characters</li>
-                <li>• At least one number</li>
-                <li>• At least one uppercase letter</li>
-                <li>• At least one special character</li>
+                <li>• Minimal 8 karakter</li>
+                <li>• Setidaknya satu angka</li>
+                <li>• Setidaknya satu huruf kapital</li>
+                <li>• Setidaknya satu karakter khusus</li>
               </ul>
             </span>
           </div>

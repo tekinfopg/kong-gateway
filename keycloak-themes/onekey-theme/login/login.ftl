@@ -58,32 +58,6 @@
             </svg>
           </button>
         </div>
-        
-        <!-- Tooltip Password -->
-        <div class="mt-2 flex justify-between items-center">
-          <div class="text-xs text-gray-500 dark:text-gray-400">Password harus terdapat:</div>
-          <div class="tooltip relative">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 dark:text-gray-500" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" />
-            </svg>
-            <span class="tooltip-text">
-              <ul class="text-xs text-left">
-                <li>• Minimal 8 karakter</li>
-                <li>• Setidaknya satu angka</li>
-                <li>• Setidaknya satu huruf kapital</li>
-                <li>• Setidaknya satu spesial karakter [!@#$%^&*(),.?":{}|<>]</li>
-              </ul>
-            </span>
-          </div>
-        </div>
-        
-        <!-- Meter Kekuatan Password -->
-        <div class="password-strength-meter mt-2">
-          <div class="password-strength-meter-fill"></div>
-        </div>
-        <div class="flex justify-between items-center mt-1">
-          <span id="password-strength-text" class="text-xs text-gray-500 dark:text-gray-400"></span>
-        </div>
       </div>
 
       <div class="flex items-center justify-between">
@@ -116,33 +90,6 @@
               Daftar
           </a>
         </p>
-      </div>
-    </#if>
-    
-    <!-- Identity Provider Logins (if configured) -->
-    <#if realm.password && social.providers??>
-      <div class="mt-6">
-        <div class="relative">
-          <div class="absolute inset-0 flex items-center">
-            <div class="w-full border-t border-gray-300 dark:border-gray-700"></div>
-          </div>
-          <div class="relative flex justify-center text-sm">
-            <span class="px-2 bg-white dark:bg-gray-900 text-gray-500 dark:text-gray-400">
-              ${msg("identity-provider-login-label", 'third-party')}
-            </span>
-          </div>
-        </div>
-
-        <div class="mt-6 grid grid-cols-1 gap-3">
-          <#list social.providers as p>
-            <a href="${p.loginUrl}" id="social-${p.alias}" class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-md shadow-sm bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700">
-              <#if p.iconClasses?has_content>
-                <i class="${p.iconClasses!} mr-2"></i>
-              </#if>
-              ${p.displayName!}
-            </a>
-          </#list>
-        </div>
       </div>
     </#if>
 

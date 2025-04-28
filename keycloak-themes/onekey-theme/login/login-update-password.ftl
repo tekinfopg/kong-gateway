@@ -42,8 +42,10 @@
               </svg>
             </button>
           </div>
+          
+          <!-- Password Strength Meter -->
           <div class="password-strength-meter mt-2">
-            <div class="password-strength-meter-fill weak"></div>
+            <div class="password-strength-meter-fill"></div>
           </div>
           <div class="mt-1 flex justify-between">
             <span id="password-strength-text" class="text-xs text-gray-500 dark:text-gray-400">Kekuatan kata sandi</span>
@@ -51,22 +53,24 @@
               <span class="text-xs text-red-500">${kcSanitize(messagesPerField.getFirstError('password', 'password-confirm'))?no_esc}</span>
             </#if>
           </div>
+          
+          <!-- Password Requirements -->
           <div class="mt-2">
             <ul class="text-xs text-gray-500 dark:text-gray-400 space-y-1">
-              <li class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <li class="flex items-center" id="length-requirement">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 requirement-icon" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
                 Minimal 8 karakter
               </li>
-              <li class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <li class="flex items-center" id="case-requirement">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 requirement-icon" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
                 Berisi huruf besar & kecil
               </li>
-              <li class="flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1" viewBox="0 0 20 20" fill="currentColor">
+              <li class="flex items-center" id="special-requirement">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3 mr-1 requirement-icon" viewBox="0 0 20 20" fill="currentColor">
                   <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
                 </svg>
                 Berisi angka & karakter khusus
@@ -100,6 +104,9 @@
                 <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
               </svg>
             </button>
+          </div>
+          <div id="password-match-message" class="mt-1 text-xs text-red-500 hidden">
+            Kata sandi tidak cocok. Silakan periksa kembali.
           </div>
           <#if messagesPerField.existsError('password-confirm')>
             <div class="mt-1">
@@ -166,3 +173,114 @@
     </div>
   </#if>
 </@layout.registrationLayout>
+
+<script>
+  // Password strength indicator functionality
+  const passwordInput = document.getElementById('password-new');
+  const confirmPasswordInput = document.getElementById('password-confirm');
+  const strengthMeter = document.querySelector('.password-strength-meter-fill');
+  const strengthText = document.getElementById('password-strength-text');
+  const passwordMatchMessage = document.getElementById('password-match-message');
+  const requirementIcons = document.querySelectorAll('.requirement-icon');
+  
+  // Password requirements check
+  function checkPasswordRequirements(password) {
+    const hasLength = password.length >= 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    
+    // Update requirement icons
+    document.getElementById('length-requirement').classList.toggle('text-green-500', hasLength);
+    document.getElementById('case-requirement').classList.toggle('text-green-500', hasUpperCase && hasLowerCase);
+    document.getElementById('special-requirement').classList.toggle('text-green-500', hasNumber && hasSpecialChar);
+    
+    return {
+      hasLength,
+      hasUpperCase,
+      hasLowerCase,
+      hasNumber,
+      hasSpecialChar
+    };
+  }
+  
+  // Password strength calculation
+  function calculatePasswordStrength(password) {
+    const requirements = checkPasswordRequirements(password);
+    let strength = 0;
+    
+    if (requirements.hasLength) strength += 1;
+    if (requirements.hasUpperCase && requirements.hasLowerCase) strength += 1;
+    if (requirements.hasNumber) strength += 1;
+    if (requirements.hasSpecialChar) strength += 1;
+    
+    return strength;
+  }
+  
+  // Update password strength meter
+  function updatePasswordStrength(password) {
+    const strength = calculatePasswordStrength(password);
+    
+    if (strengthMeter) {
+      strengthMeter.className = 'password-strength-meter-fill';
+      if (strength === 0) {
+        strengthMeter.classList.add('weak');
+        if (strengthText) strengthText.textContent = 'Sangat Lemah';
+      } else if (strength === 1) {
+        strengthMeter.classList.add('weak');
+        if (strengthText) strengthText.textContent = 'Lemah';
+      } else if (strength === 2) {
+        strengthMeter.classList.add('medium');
+        if (strengthText) strengthText.textContent = 'Sedang';
+      } else if (strength === 3) {
+        strengthMeter.classList.add('strong');
+        if (strengthText) strengthText.textContent = 'Kuat';
+      } else {
+        strengthMeter.classList.add('very-strong');
+        if (strengthText) strengthText.textContent = 'Sangat Kuat';
+      }
+    }
+  }
+  
+  // Check password match
+  function checkPasswordMatch() {
+    const password = passwordInput.value;
+    const confirmPassword = confirmPasswordInput.value;
+    
+    if (confirmPassword && password !== confirmPassword) {
+      passwordMatchMessage.classList.remove('hidden');
+      confirmPasswordInput.classList.add('border-red-500');
+    } else {
+      passwordMatchMessage.classList.add('hidden');
+      confirmPasswordInput.classList.remove('border-red-500');
+    }
+  }
+  
+  // Event listeners
+  if (passwordInput) {
+    passwordInput.addEventListener('input', function() {
+      updatePasswordStrength(this.value);
+    });
+  }
+  
+  if (confirmPasswordInput) {
+    confirmPasswordInput.addEventListener('input', checkPasswordMatch);
+  }
+  
+  // Toggle password visibility
+  const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+  togglePasswordButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const input = document.querySelector(this.getAttribute('data-target'));
+      const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+      input.setAttribute('type', type);
+      
+      const showIcon = this.querySelector('.show-password');
+      const hideIcon = this.querySelector('.hide-password');
+      
+      if (showIcon) showIcon.classList.toggle('hidden');
+      if (hideIcon) hideIcon.classList.toggle('hidden');
+    });
+  });
+</script>

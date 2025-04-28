@@ -424,8 +424,8 @@
             <div class="flex flex-wrap justify-center items-center gap-6">
               <!-- BUMN Badge -->
               <div class="badge-container group relative transition-all duration-300 hover:scale-110">
-                <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-6 group-hover:brightness-110 dark:hidden" />
-                <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-6 group-hover:brightness-110 hidden dark:block" />
+                <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-4 group-hover:brightness-110 dark:hidden" />
+                <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-4 group-hover:brightness-110 hidden dark:block" />
                 <div class="badge-tooltip opacity-0 group-hover:opacity-100 absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-3 py-1 rounded-lg transition-all duration-300 pointer-events-none w-32 text-center">
                   BUMN Indonesia
                 </div>
@@ -433,8 +433,8 @@
               
               <!-- PKG Badge -->
               <div class="badge-container group relative transition-all duration-300 hover:scale-110">
-                <img src="${url.resourcesPath}/img/PKG.png" alt="Petrokimia Gresik" class="h-10 group-hover:brightness-110 dark:hidden" />
-                <img src="${url.resourcesPath}/img/PKG-putih.png" alt="Petrokimia Gresik" class="h-10 group-hover:brightness-110 hidden dark:block" />
+                <img src="${url.resourcesPath}/img/PKG.png" alt="Petrokimia Gresik" class="h-8 group-hover:brightness-110 dark:hidden" />
+                <img src="${url.resourcesPath}/img/PKG-putih.png" alt="Petrokimia Gresik" class="h-8 group-hover:brightness-110 hidden dark:block" />
                 <div class="badge-tooltip opacity-0 group-hover:opacity-100 absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-3 py-1 rounded-lg transition-all duration-300 pointer-events-none w-32 text-center">
                   Petrokimia Gresik
                 </div>
@@ -442,8 +442,8 @@
               
               <!-- PI Badge -->
               <div class="badge-container group relative transition-all duration-300 hover:scale-110">
-                <img src="${url.resourcesPath}/img/PI.png" alt="Pupuk Indonesia" class="h-10 group-hover:brightness-110 dark:hidden" />
-                <img src="${url.resourcesPath}/img/PI-putih.png" alt="Pupuk Indonesia" class="h-10 group-hover:brightness-110 hidden dark:block" />
+                <img src="${url.resourcesPath}/img/PI.png" alt="Pupuk Indonesia" class="h-8 group-hover:brightness-110 dark:hidden" />
+                <img src="${url.resourcesPath}/img/PI-putih.png" alt="Pupuk Indonesia" class="h-8 group-hover:brightness-110 hidden dark:block" />
                 <div class="badge-tooltip opacity-0 group-hover:opacity-100 absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-3 py-1 rounded-lg transition-all duration-300 pointer-events-none w-32 text-center">
                   Pupuk Indonesia
                 </div>
@@ -452,7 +452,7 @@
               <!-- ISO 27001 Certificate Badge -->
               <div class="badge-container group relative transition-all duration-300 hover:scale-110">
                 <div class="relative">
-                  <img id="iso-badge" src="${url.resourcesPath}/img/ISO27001.png" alt="ISO 27001 Certified" class="rounded-xl h-12 group-hover:brightness-110 cursor-pointer border-2 border-transparent group-hover:border-green-500 dark:group-hover:border-yellow-500" />
+                  <img id="iso-badge" src="${url.resourcesPath}/img/ISO27001.png" alt="ISO 27001 Certified" class="rounded-xl h-10 group-hover:brightness-110 cursor-pointer border-2 border-transparent group-hover:border-green-500 dark:group-hover:border-yellow-500" />
                   <div class="absolute -top-2 -right-2 bg-green-500 dark:bg-yellow-500 text-white text-xs px-1 rounded-full hidden group-hover:block animate-pulse">
                     Ver
                   </div>
@@ -500,31 +500,31 @@
       </div>
       <!-- Add mobile footer -->
       <div class="lg:hidden fixed bottom-0 left-0 right-0 w-full z-50">
-        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-t-xl p-3 shadow-lg border-t border-gray-200 dark:border-gray-700">
-          <div class="flex flex-wrap justify-center items-center gap-4 overflow-x-auto py-1 scrollbar-hide" id="mobile-badges-container">
+        <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-t-xl p-2 shadow-lg border-t border-gray-200 dark:border-gray-700">
+          <div class="flex flex-wrap justify-center items-center gap-2 overflow-x-auto py-1 scrollbar-hide" id="mobile-badges-container">
             <!-- BUMN Badge -->
             <div class="badge-container relative flex flex-col items-center min-w-max">
-              <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-5 transition duration-300 hover:scale-110 dark:hidden" />
-              <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-5 transition duration-300 hover:scale-110 hidden dark:block" />
+              <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 dark:hidden" />
+              <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 hidden dark:block" />
             </div>
             
             <!-- PKG Badge -->
             <div class="badge-container relative flex flex-col items-center min-w-max">
-              <img src="${url.resourcesPath}/img/PKG.png" alt="Petrokimia Gresik" class="h-8 transition duration-300 hover:scale-110 dark:hidden" />
-              <img src="${url.resourcesPath}/img/PKG-putih.png" alt="Petrokimia Gresik" class="h-8 transition duration-300 hover:scale-110 hidden dark:block" />
+              <img src="${url.resourcesPath}/img/PKG.png" alt="Petrokimia Gresik" class="h-5 transition duration-300 hover:scale-110 dark:hidden" />
+              <img src="${url.resourcesPath}/img/PKG-putih.png" alt="Petrokimia Gresik" class="h-5 transition duration-300 hover:scale-110 hidden dark:block" />
             </div>
             
             <!-- PI Badge -->
             <div class="badge-container relative flex flex-col items-center min-w-max">
-              <img src="${url.resourcesPath}/img/PI.png" alt="PI" class="h-8 transition duration-300 hover:scale-110 dark:hidden" />
-              <img src="${url.resourcesPath}/img/PI-putih.png" alt="PI" class="h-8 transition duration-300 hover:scale-110 hidden dark:block" />
+              <img src="${url.resourcesPath}/img/PI.png" alt="PI" class="h-5 transition duration-300 hover:scale-110 dark:hidden" />
+              <img src="${url.resourcesPath}/img/PI-putih.png" alt="PI" class="h-5 transition duration-300 hover:scale-110 hidden dark:block" />
             </div>
             
             <!-- ISO Badge -->
             <div class="badge-container relative flex flex-col items-center min-w-max animate-pulse-slow">
               <div class="relative">
-                <img id="iso-badge-mobile" src="${url.resourcesPath}/img/ISO27001.jpg" alt="ISO 27001 Certified" class="rounded-xl h-10 transition duration-300 hover:scale-110 cursor-pointer border-2 border-transparent hover:border-green-500 dark:hover:border-yellow-500" />
-                <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full"></div>
+                <img id="iso-badge-mobile" src="${url.resourcesPath}/img/ISO27001.jpg" alt="ISO 27001 Certified" class="rounded-xl h-6 transition duration-300 hover:scale-110 cursor-pointer border-2 border-transparent hover:border-green-500 dark:hover:border-yellow-500" />
+                <div class="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full"></div>
               </div>
             </div>
           </div>
@@ -538,25 +538,32 @@
     const themeToggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     
-    // Check for saved theme or use system preference
-    if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    // Use system preference by default
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
       html.classList.add('dark');
     } else {
       html.classList.remove('dark');
     }
     
-    // Toggle theme with animation
+    // Listen for system theme changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (e.matches) {
+        html.classList.add('dark');
+      } else {
+        html.classList.remove('dark');
+      }
+    });
+    
+    // Toggle theme with animation (only for manual override)
     themeToggle.addEventListener('click', () => {
       if (html.classList.contains('dark')) {
         html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
         themeToggle.classList.add('rotate-180');
         setTimeout(() => {
           themeToggle.classList.remove('rotate-180');
         }, 300);
       } else {
         html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
         themeToggle.classList.add('rotate-180');
         setTimeout(() => {
           themeToggle.classList.remove('rotate-180');
