@@ -42,7 +42,6 @@ volumes:
 
 networks:
   kong-net:
-    driver: bridge
   proxy:
     name: proxy
     external: true
@@ -154,7 +153,12 @@ services:
       - proxy
   kong-redis:
     image: redis:alpine3.21
-    container_name: redis
+    container_name: ${REDIS_HOST:-kong-redis}
+    restart: always
+    environment:
+      - REDIS_HOST=${REDIS_HOST:-kong-redis}
+      - REDIS_PORT=${REDIS_PORT:-6379}
+      - REDIS_TIMEOUT=${REDIS_TIMEOUT:-1000}
     networks:
       - kong-net
     volumes:

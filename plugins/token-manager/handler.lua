@@ -46,6 +46,9 @@ Note: This plugin requires Redis connection and proper configuration of refresh 
 local http = require "resty.http"
 local cjson = require "cjson"
 local redis = require "resty.redis"
+local redis_host = os.getenv("REDIS_HOST") or "kong-redis"
+local redis_port = tonumber(os.getenv("REDIS_PORT")) or 6379
+local redis_timeout = tonumber(os.getenv("REDIS_TIMEOUT")) or 1000
 
 local TokenManagerPlugin = {
     PRIORITY = 802,
@@ -64,10 +67,10 @@ end
 -- Connect to Redis
 local function connect_to_redis()
     local red = redis:new()
-    red:set_timeout(1000) -- 1 detik timeout
+    red:set_timeout(redis_timeout) -- 1 detik timeout
 
     -- Sesuaikan dengan konfigurasi Redis Anda
-    local ok, err = red:connect("kong-redis", 6379)
+    local ok, err = red:connect(redis_host, redis_port)
     if not ok then
         kong.log("Failed to connect to Redis: ", err)
         return nil
