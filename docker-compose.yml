@@ -96,7 +96,6 @@ services:
       KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
       - proxy
-      - proxy
     ports:
       - ${KONG_PROXY_LISTEN:-8000}:${KONG_PROXY_LISTEN:-8000}
       # - ${KONG_ADMIN_LISTEN:-8001}:${KONG_ADMIN_LISTEN:-8001}
@@ -125,7 +124,6 @@ services:
       - NODE_ENV=development
     networks:
       - proxy
-      - proxy
     ports:
       - ${KONGA_LISTEN:-1337}:1337
     restart: on-failure
@@ -151,7 +149,6 @@ services:
     depends_on:
       - kong
     networks:
-      - proxy
       - proxy
   kong-redis:
     image: redis:alpine3.21
