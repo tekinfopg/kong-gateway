@@ -47,9 +47,6 @@ networks:
   proxy:
     name: proxy
     external: true
-  bridge:
-    name: bridge
-    external: true
 
 services:
   kong-migrations:
@@ -61,7 +58,7 @@ services:
     environment:
       <<: *kong-env
     networks:
-      - bridge
+      - proxy
     restart: on-failure:5
 
   kong-migrations-up:
@@ -73,7 +70,7 @@ services:
     environment:
       <<: *kong-env
     networks:
-      - bridge
+      - proxy
     restart: on-failure:5
     depends_on:
       - kong-migrations
@@ -98,7 +95,7 @@ services:
       KONG_ADMIN_SSL_CERT: "${CERT_FILE:-}"
       KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
-      - bridge
+      - proxy
       - proxy
     ports:
       - ${KONG_PROXY_LISTEN:-8000}:${KONG_PROXY_LISTEN:-8000}
@@ -127,7 +124,7 @@ services:
     environment:
       - NODE_ENV=development
     networks:
-      - bridge
+      - proxy
       - proxy
     ports:
       - ${KONGA_LISTEN:-1337}:1337
@@ -154,13 +151,13 @@ services:
     depends_on:
       - kong
     networks:
-      - bridge
+      - proxy
       - proxy
   kong-redis:
     image: redis:alpine3.21
     container_name: ${REDIS_HOST:-kong-redis}
     restart: always
     networks:
-      - bridge
+      - proxy
     volumes:
       - redis-datastore:/data
