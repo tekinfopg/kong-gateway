@@ -119,7 +119,7 @@ services:
       - no-new-privileges
   konga:
     container_name: konga
-    image: pantsel/konga
+    image: edoaurahman/konga:latest
     environment:
       - NODE_ENV=development
     networks:
