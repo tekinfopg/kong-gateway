@@ -63,7 +63,7 @@ return {
                             default = {},
                             elements = {
                                 type = "string",
-                                pattern = "^%w+:%w+$"
+                                match = "^[%w%._-]+:[%w%._-]+$"
                             },
                         }
                     }
