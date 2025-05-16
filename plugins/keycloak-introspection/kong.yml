@@ -1,0 +1,4 @@
+name: keycloak-introspection
+description: Auth based on Keycloak introspection plugin
+priority: 1200
+version: 1.0.0
