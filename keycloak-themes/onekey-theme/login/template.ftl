@@ -421,13 +421,12 @@
         <!-- Updated Desktop Company Badges -->
         <div class="mt-5 flex flex-wrap justify-center gap-6 absolute bottom-0 left-0 right-0 mx-auto w-full px-4 pb-4 z-20">
           <div class="bg-white/80 dark:bg-white/10 backdrop-blur-md rounded-3xl p-4 mx-auto max-w-lg shadow-lg border border-white/30 dark:border-white/10 transition-all duration-300 hover:shadow-xl">
-            <div class="flex flex-wrap justify-center items-center gap-6">
-              <!-- BUMN Badge -->
+            <div class="flex flex-wrap justify-center items-center gap-6">              <!-- Danantara Badge -->
               <div class="badge-container group relative transition-all duration-300 hover:scale-110">
-                <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-4 group-hover:brightness-110 dark:hidden" />
-                <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-4 group-hover:brightness-110 hidden dark:block" />
+                <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (Color).png" alt="Danantara Indonesia" class="h-4 group-hover:brightness-110 dark:hidden" />
+                <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (White).png" alt="Danantara Indonesia" class="h-4 group-hover:brightness-110 hidden dark:block" />
                 <div class="badge-tooltip opacity-0 group-hover:opacity-100 absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-3 py-1 rounded-lg transition-all duration-300 pointer-events-none w-32 text-center">
-                  BUMN Indonesia
+                  Danantara Indonesia
                 </div>
               </div>
               
@@ -501,11 +500,10 @@
       <!-- Add mobile footer -->
       <div class="lg:hidden fixed bottom-0 left-0 right-0 w-full z-50">
         <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-md rounded-t-xl p-2 shadow-lg border-t border-gray-200 dark:border-gray-700">
-          <div class="flex flex-wrap justify-center items-center gap-2 overflow-x-auto py-1 scrollbar-hide" id="mobile-badges-container">
-            <!-- BUMN Badge -->
+          <div class="flex flex-wrap justify-center items-center gap-2 overflow-x-auto py-1 scrollbar-hide" id="mobile-badges-container">            <!-- Danantara Badge -->
             <div class="badge-container relative flex flex-col items-center min-w-max">
-              <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 dark:hidden" />
-              <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 hidden dark:block" />
+              <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (Color).png" alt="Danantara Indonesia" class="h-3 transition duration-300 hover:scale-110 dark:hidden" />
+              <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (White).png" alt="Danantara Indonesia" class="h-3 transition duration-300 hover:scale-110 hidden dark:block" />
             </div>
             
             <!-- PKG Badge -->
@@ -537,13 +535,8 @@
     // Dark/Light Theme Toggle
     const themeToggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
-    
-    // Use system preference by default
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      html.classList.add('dark');
-    } else {
-      html.classList.remove('dark');
-    }
+      // Set light theme as default
+    html.classList.remove('dark');
     
     // Listen for system theme changes
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
