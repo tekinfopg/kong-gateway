@@ -133,7 +133,7 @@ services:
       - kong
 
   keycloak:
-    image: keycloak/keycloak:latest
+    image: keycloak/keycloak:26.2
     command: start
     container_name: keycloak
     environment:
