@@ -48,9 +48,6 @@ networks:
   proxy:
     name: proxy
     external: true
-  backend:
-    name: backend
-    external: true
 
 services:
   kong-migrations:
@@ -99,7 +96,7 @@ services:
       KONG_ADMIN_SSL_CERT: "${CERT_FILE:-}"
       KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
-      - backend
+      - proxy
       - api-gw
     ports:
       - ${KONG_PROXY_LISTEN:-8000}:${KONG_PROXY_LISTEN:-8000}
