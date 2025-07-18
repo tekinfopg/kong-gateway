@@ -44,12 +44,8 @@ volumes:
   redis-datastore: {}
 
 networks:
-  api-gw:
   proxy:
     name: proxy
-    external: true
-  backend:
-    name: backend
     external: true
 
 services:
@@ -99,8 +95,7 @@ services:
       KONG_ADMIN_SSL_CERT: "${CERT_FILE:-}"
       KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
-      - backend
-      - api-gw
+      - proxy
     ports:
       - ${KONG_PROXY_LISTEN:-8000}:${KONG_PROXY_LISTEN:-8000}
       # - ${KONG_ADMIN_LISTEN:-8001}:${KONG_ADMIN_LISTEN:-8001}
@@ -129,7 +124,6 @@ services:
       - NODE_ENV=development
     networks:
       - proxy
-      - api-gw
     ports:
       - ${KONGA_LISTEN:-1337}:1337
     restart: on-failure
@@ -139,7 +133,7 @@ services:
       - kong
 
   keycloak:
-    image: keycloak/keycloak:latest
+    image: keycloak/keycloak:26.2
     command: start
     container_name: keycloak
     environment:
@@ -161,6 +155,6 @@ services:
     container_name: ${REDIS_HOST:-kong-redis}
     restart: always
     networks:
-      - api-gw
+      - proxy
     volumes:
       - redis-datastore:/data
