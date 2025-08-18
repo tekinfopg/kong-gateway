@@ -96,6 +96,8 @@ services:
       KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
       - proxy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     ports:
       - ${KONG_PROXY_LISTEN:-8000}:${KONG_PROXY_LISTEN:-8000}
       # - ${KONG_ADMIN_LISTEN:-8001}:${KONG_ADMIN_LISTEN:-8001}
@@ -151,6 +153,8 @@ services:
       - kong
     networks:
       - proxy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
   kong-redis:
     image: redis:alpine3.21
     container_name: ${REDIS_HOST:-kong-redis}
