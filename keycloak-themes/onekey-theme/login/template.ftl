@@ -424,8 +424,8 @@
             <div class="flex flex-wrap justify-center items-center gap-6">
               <!-- BUMN Badge -->
               <div class="badge-container group relative transition-all duration-300 hover:scale-110">
-                <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-4 group-hover:brightness-110 dark:hidden" />
-                <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-4 group-hover:brightness-110 hidden dark:block" />
+                <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (Color).png" alt="Danantara Indonesia" class="h-4 group-hover:brightness-110 dark:hidden" />
+                <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (White).png" alt="Danantara Indonesia" class="h-4 group-hover:brightness-110 hidden dark:block" />
                 <div class="badge-tooltip opacity-0 group-hover:opacity-100 absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/80 text-white text-xs px-3 py-1 rounded-lg transition-all duration-300 pointer-events-none w-32 text-center">
                   BUMN Indonesia
                 </div>
@@ -504,8 +504,8 @@
           <div class="flex flex-wrap justify-center items-center gap-2 overflow-x-auto py-1 scrollbar-hide" id="mobile-badges-container">
             <!-- BUMN Badge -->
             <div class="badge-container relative flex flex-col items-center min-w-max">
-              <img src="${url.resourcesPath}/img/BUMN.png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 dark:hidden" />
-              <img src="${url.resourcesPath}/img/BUMN-putih.png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 hidden dark:block" />
+              <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (Color).png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 dark:hidden" />
+              <img src="${url.resourcesPath}/img/Danantara_Indonesia_Logo_vector (White).png" alt="BUMN Indonesia" class="h-3 transition duration-300 hover:scale-110 hidden dark:block" />
             </div>
             
             <!-- PKG Badge -->
