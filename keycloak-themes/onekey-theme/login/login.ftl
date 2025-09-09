@@ -10,7 +10,7 @@
     </header>
 
     <!-- Form Login -->
-    <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post" class="space-y-6">
+    <form id="kc-form-login" onsubmit="document.getElementById('kc-login').disabled = true; document.getElementById('login-text').innerText = 'Memproses...'; document.getElementById('login-icon').classList.add('animate-spin'); return true;" action="${url.loginAction}" method="post" class="space-y-6">
       <div class="form-group">
         <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           ${msg("username")} <span class="text-secondary dark:text-accent">*</span>
