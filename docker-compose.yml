@@ -78,9 +78,19 @@ services:
       - kong-migrations
 
   kong:
-    container_name: kong
-    image: "${KONG_DOCKER_TAG:-kong:latest}"
+    container_name: kong-gateway
+    # For local build, uncomment 'build' and comment 'image'
+    # build:
+    #   context: .
+    #   dockerfile: ./deploy/Dockerfile.kong
+    image: "${KONG_DOCKER_TAG:-ghcr.io/tekinfopg/kong-gateway/kong:latest}"
     user: "${KONG_USER:-kong}"
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.scope=kongloak"
+      - "org.opencontainers.image.authors=edoaurahman@gmail.com, muhammadirfannh36@gmail.com"
+      - "org.opencontainers.image.description=Kongloak - Kong Gateway with custom plugins"
+      - "org.opencontainers.image.vendor=tekinfopg"
     environment:
       <<: *kong-env
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
@@ -136,9 +146,19 @@ services:
       - kong
 
   keycloak:
-    image: keycloak/keycloak:26.2
+    # For local build, uncomment 'build' and comment 'image'
+    # build:
+    #   context: .
+    #   dockerfile: ./deploy/Dockerfile.keycloak
+    image: "${KEYCLOAK_DOCKER_TAG:-ghcr.io/tekinfopg/kong-gateway/keycloak:latest}"
     command: start
     container_name: keycloak
+    labels:
+      - "com.centurylinklabs.watchtower.enable=true"
+      - "com.centurylinklabs.watchtower.scope=kongloak"
+      - "org.opencontainers.image.authors=edoaurahman@gmail.com, muhammadirfannh36@gmail.com"
+      - "org.opencontainers.image.description=Kongloak - Keycloak with custom themes and providers"
+      - "org.opencontainers.image.vendor=tekinfopg"
     environment:
       <<: *keycloak-env
     ports:
@@ -157,7 +177,48 @@ services:
     image: redis:alpine3.21
     container_name: ${REDIS_HOST:-kong-redis}
     restart: always
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     networks:
       - proxy
     volumes:
       - redis-datastore:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 30s
+
+  # Watchtower for Auto-Deploy
+  kongloak-watchtower:
+    image: containrrr/watchtower:latest
+    container_name: kongloak-watchtower
+    restart: always
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+      - "com.centurylinklabs.watchtower.scope=kongloak"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - REPO_USER=${GHCR_USERNAME}
+      - REPO_PASS=${GHCR_TOKEN}
+      - WATCHTOWER_POLL_INTERVAL=${WATCHTOWER_POLL_INTERVAL:-60}
+      - WATCHTOWER_LABEL_ENABLE=true
+      - WATCHTOWER_CLEANUP=true
+      - WATCHTOWER_INCLUDE_RESTARTING=true
+      - WATCHTOWER_INCLUDE_STOPPED=false
+      - WATCHTOWER_SCOPE=kongloak
+      - WATCHTOWER_NOTIFICATIONS=${WATCHTOWER_NOTIFICATIONS:-}
+      - WATCHTOWER_NOTIFICATION_URL=${WATCHTOWER_NOTIFICATION_URL:-}
+      - TZ=${TZ:-Asia/Jakarta}
+    command:
+      - "--interval"
+      - "${WATCHTOWER_POLL_INTERVAL:-60}"
+      - "--label-enable"
+      - "--cleanup"
+      - "--scope"
+      - "kongloak"
+    networks:
+      - proxy
