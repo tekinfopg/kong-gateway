@@ -1,17 +1,14 @@
 # Kongloak Keycloak Dockerfile
-# Based on Keycloak 26.2 with custom themes and providers
+# Based on Keycloak 26.2 with custom themes
 
 ARG KEYCLOAK_VERSION=26.2
 FROM quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}
 
 # Metadata
-LABEL maintainer="edoaurahman@gmail.com"
+LABEL maintainer="edoaurahman@gmail.com, muhammadirfannh36@gmail.com"
 LABEL org.opencontainers.image.title="Kongloak Keycloak"
-LABEL org.opencontainers.image.description="Keycloak with custom themes and event providers"
+LABEL org.opencontainers.image.description="Keycloak with custom themes"
 LABEL org.opencontainers.image.vendor="tekinfopg"
-
-# Copy custom providers (JARs)
-COPY keycloak-plugins/event-listener/target/*.jar /opt/keycloak/providers/
 
 # Copy custom themes
 COPY keycloak-themes/onekey-theme /opt/keycloak/themes/onekey-theme/
@@ -19,12 +16,8 @@ COPY keycloak-plugins/keywind/theme/keywind /opt/keycloak/themes/keywind/
 
 # Set permissions
 USER root
-RUN chmod -R 755 /opt/keycloak/themes && \
-    chmod 644 /opt/keycloak/providers/*.jar
+RUN chmod -R 755 /opt/keycloak/themes
 USER keycloak
-
-# Build optimized Keycloak
-RUN /opt/keycloak/bin/kc.sh build
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=90s \

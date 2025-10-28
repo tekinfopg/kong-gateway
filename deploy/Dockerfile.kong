@@ -5,7 +5,7 @@ ARG KONG_VERSION=3.9.0
 FROM kong:${KONG_VERSION}-ubuntu
 
 # Metadata
-LABEL maintainer="edoaurahman@gmail.com"
+LABEL maintainer="edoaurahman@gmail.com, muhammadirfannh36@gmail.com"
 LABEL org.opencontainers.image.title="Kongloak Kong Gateway"
 LABEL org.opencontainers.image.description="Kong Gateway with Token Manager V2 and Keycloak Introspection plugins"
 LABEL org.opencontainers.image.vendor="tekinfopg"
@@ -27,12 +27,8 @@ RUN mkdir -p /usr/local/share/lua/5.1/kong/plugins
 COPY plugins/token-manager-v2 /usr/local/share/lua/5.1/kong/plugins/token-manager-v2
 COPY plugins/keycloak-introspection /usr/local/share/lua/5.1/kong/plugins/keycloak-introspection
 
-# Copy configuration files
-COPY config /opt/kong
-
 # Set correct permissions
 RUN chown -R kong:kong /usr/local/share/lua/5.1/kong/plugins && \
-    chown -R kong:kong /opt/kong && \
     chmod -R 755 /usr/local/share/lua/5.1/kong/plugins
 
 # Set environment variables for plugins
