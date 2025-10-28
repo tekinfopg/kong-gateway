@@ -1,0 +1,4 @@
+name: token-manager-v2
+description: Plugin for managing tokens and automatic refresh tokens (Version 2 - Fixed)
+priority: 802
+version: 2.0.0
