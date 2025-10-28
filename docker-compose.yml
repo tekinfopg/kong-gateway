@@ -28,6 +28,8 @@ x-keycloak-config: &keycloak-env
   PROXY_ADDRESS_FORWARDING: true
   KC_PROXY_HEADERS: ${KC_PROXY_HEADERS:-xforwarded}
   LOG_ACTIVITY_KEY: ${LOG_ACTIVITY_KEY}
+  KC_PROXY: ${KC_PROXY-edge}
+  
   
 volumes:
   kong_data: {}

@@ -10,7 +10,7 @@
     </header>
 
     <!-- Form Login -->
-    <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post" class="space-y-6">
+    <form id="kc-form-login" onsubmit="document.getElementById('kc-login').disabled = true; document.getElementById('login-text').innerText = 'Memproses...'; return true;" action="${url.loginAction}" method="post" class="space-y-6">
       <div class="form-group">
         <label for="username" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
           ${msg("username")} <span class="text-secondary dark:text-accent">*</span>
@@ -74,8 +74,8 @@
         </#if>
       </div>
 
-      <button tabindex="4" type="submit" class="w-full bg-secondary hover:bg-secondary-600 dark:bg-accent dark:hover:bg-accent-600 text-white py-3 px-4 rounded-lg transition-all hover:shadow-lg flex items-center justify-center gap-2 font-medium">
-        <span>Masuk</span>
+      <button tabindex="4" type="submit" name="login" id="kc-login" class="w-full bg-secondary hover:bg-secondary-600 dark:bg-accent dark:hover:bg-accent-600 text-white py-3 px-4 rounded-lg transition-all hover:shadow-lg flex items-center justify-center gap-2 font-medium">
+        <span id="login-text">Masuk</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
           <path fill-rule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
         </svg>
