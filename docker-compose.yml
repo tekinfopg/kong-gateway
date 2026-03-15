@@ -46,8 +46,9 @@ volumes:
   redis-datastore: {}
 
 networks:
-  proxy:
-    name: proxy
+  internal:
+    driver: bridge
+  proxy-tier:
     external: true
 
 services:
@@ -60,7 +61,8 @@ services:
     environment:
       <<: *kong-env
     networks:
-      - proxy
+      - proxy-tier
+      - internal
     restart: on-failure:5
 
   kong-migrations-up:
@@ -72,7 +74,8 @@ services:
     environment:
       <<: *kong-env
     networks:
-      - proxy
+      - proxy-tier
+      - internal
     restart: on-failure:5
     depends_on:
       - kong-migrations
@@ -107,7 +110,8 @@ services:
       KONG_ADMIN_SSL_CERT: "${CERT_FILE:-}"
       KONG_ADMIN_SSL_CERT_KEY: "${CERT_KEY_FILE:-}"
     networks:
-      - proxy
+      - proxy-tier
+      - internal
     ports:
       - ${KONG_PROXY_LISTEN:-8000}:${KONG_PROXY_LISTEN:-8000}
       # - ${KONG_ADMIN_LISTEN:-8001}:${KONG_ADMIN_LISTEN:-8001}
@@ -135,7 +139,8 @@ services:
     environment:
       - NODE_ENV=development
     networks:
-      - proxy
+      - proxy-tier
+      - internal
     ports:
       - ${KONGA_LISTEN:-1337}:1337
     restart: on-failure
@@ -171,7 +176,8 @@ services:
     depends_on:
       - kong
     networks:
-      - proxy
+      - proxy-tier
+      - internal
   kong-redis:
     image: redis:alpine3.21
     container_name: ${REDIS_HOST:-kong-redis}
@@ -180,7 +186,8 @@ services:
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     networks:
-      - proxy
+      - proxy-tier
+      - internal
     volumes:
       - redis-datastore:/data
     healthcheck:
@@ -220,4 +227,5 @@ services:
       - "--scope"
       - "kongloak"
     networks:
-      - proxy
+      - proxy-tier
+      - internal
