@@ -121,6 +121,7 @@ services:
       - kong_tmp_vol:/tmp
       - ./config:/opt/kong
       - ${KONG_CERT_DIR:-./certs}:/certs
+      - ${KONG_ETC_CONFIG}:/opt/kong/config:ro
     security_opt:
       - no-new-privileges
   konga:
