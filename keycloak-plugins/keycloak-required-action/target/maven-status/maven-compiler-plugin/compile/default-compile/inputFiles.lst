@@ -1,0 +1,4 @@
+/mnt/WorkSpace/kong-gateway/keycloak-plugins/keycloak-required-action/src/main/java/com/edoaurahman/keycloak/requiredaction/ProfileCompletenessAuthenticator.java
+/mnt/WorkSpace/kong-gateway/keycloak-plugins/keycloak-required-action/src/main/java/com/edoaurahman/keycloak/requiredaction/ProfileCompletenessAuthenticatorFactory.java
+/mnt/WorkSpace/kong-gateway/keycloak-plugins/keycloak-required-action/src/main/java/com/edoaurahman/keycloak/requiredaction/UpdateProfileFieldsRequiredAction.java
+/mnt/WorkSpace/kong-gateway/keycloak-plugins/keycloak-required-action/src/main/java/com/edoaurahman/keycloak/requiredaction/UpdateProfileFieldsRequiredActionFactory.java

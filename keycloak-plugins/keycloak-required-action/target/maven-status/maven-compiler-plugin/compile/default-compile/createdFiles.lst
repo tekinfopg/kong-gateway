@@ -1,0 +1,4 @@
+com/edoaurahman/keycloak/requiredaction/ProfileCompletenessAuthenticator.class
+com/edoaurahman/keycloak/requiredaction/ProfileCompletenessAuthenticatorFactory.class
+com/edoaurahman/keycloak/requiredaction/UpdateProfileFieldsRequiredAction.class
+com/edoaurahman/keycloak/requiredaction/UpdateProfileFieldsRequiredActionFactory.class
