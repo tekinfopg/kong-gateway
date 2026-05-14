@@ -25,6 +25,15 @@ public class UpdateProfileFieldsRequiredAction implements RequiredActionProvider
 
     @Override
     public void evaluateTriggers(RequiredActionContext context) {
+        UserModel user = context.getUser();
+        if (user == null) return;
+        boolean emailEmpty = isBlank(user.getEmail());
+        boolean phoneEmpty = isBlank(user.getFirstAttribute(PHONE_ATTRIBUTE));
+        if (emailEmpty || phoneEmpty) {
+            user.addRequiredAction(PROVIDER_ID);
+            log.debugf("evaluateTriggers: added required action %s for user %s (emailEmpty=%s, phoneEmpty=%s)",
+                    PROVIDER_ID, user.getUsername(), emailEmpty, phoneEmpty);
+        }
     }
 
     @Override
