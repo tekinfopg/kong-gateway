@@ -182,7 +182,7 @@ services:
     image: redis:alpine3.21
     container_name: ${REDIS_HOST:-kong-redis}
     restart: always
-    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-}
+    command: redis-server --appendonly yes
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     networks:
