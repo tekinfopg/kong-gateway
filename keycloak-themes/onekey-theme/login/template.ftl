@@ -1,4 +1,18 @@
 <#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false showAnotherWayIfPresent=true>
+<#assign showEnvBanner = false>
+<#assign envBannerText = (properties.envBannerLabel!"DEVELOPMENT")>
+<#assign _rawRealms = (properties.envBannerRealms!"")>
+<#if _rawRealms?has_content && !_rawRealms?starts_with("${")>
+  <#list _rawRealms?split(",") as entry>
+    <#assign parts = entry?split(":")>
+    <#if parts[0]?trim == realm.name>
+      <#assign showEnvBanner = true>
+      <#if (parts?size > 1) && parts[1]?trim?has_content>
+        <#assign envBannerText = parts[1]?trim>
+      </#if>
+    </#if>
+  </#list>
+</#if>
 <!DOCTYPE html>
 <html lang="id" class="light">
 <head>
@@ -468,6 +482,15 @@
     <!-- Right Panel - Form -->
     <div class="w-full lg:w-1/2 lg:ml-auto flex items-center justify-center p-8">
       <div class="w-full max-w-md glass-effect dark:bg-opacity-20 p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 transition-all duration-300 relative animate-fadeIn hover:shadow-xl transform hover:-translate-y-1">
+        <#if showEnvBanner>
+          <div role="status" class="mb-6 flex items-center gap-2 rounded-lg border border-amber-400/60 bg-amber-100 px-4 py-2.5 text-amber-800 dark:border-amber-500/40 dark:bg-amber-500/15 dark:text-amber-300 animate-fadeIn">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            </svg>
+            <span class="text-xs font-semibold uppercase tracking-wider">${envBannerText} &middot; Hanya untuk pengembangan</span>
+          </div>
+        </#if>
+
         <!-- Mobile Logo - Only visible on mobile -->
         <div class="flex justify-center mb-6 lg:hidden">
           <img src="${url.resourcesPath}/img/onekey-logo.png" alt="OneKey Logo" class="h-12 object-contain" />
