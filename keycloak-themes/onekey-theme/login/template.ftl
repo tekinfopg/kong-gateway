@@ -1,6 +1,7 @@
 <#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false showAnotherWayIfPresent=true>
 <#assign showEnvBanner = false>
 <#assign envBannerText = (properties.envBannerLabel!"DEVELOPMENT")>
+<#assign envBannerNote = (properties.envBannerNote!"Hanya untuk pengembangan")>
 <#assign _rawRealms = (properties.envBannerRealms!"")>
 <#if _rawRealms?has_content && !_rawRealms?starts_with("${")>
   <#list _rawRealms?split(",") as entry>
@@ -9,6 +10,10 @@
       <#assign showEnvBanner = true>
       <#if (parts?size > 1) && parts[1]?trim?has_content>
         <#assign envBannerText = parts[1]?trim>
+      </#if>
+      <#-- An explicit but empty third segment (realm:LABEL:) suppresses the note. -->
+      <#if (parts?size > 2)>
+        <#assign envBannerNote = parts[2..]?join(":")?trim>
       </#if>
     </#if>
   </#list>
@@ -487,7 +492,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
             </svg>
-            <span class="text-xs font-semibold uppercase tracking-wider">${envBannerText} &middot; Hanya untuk pengembangan</span>
+            <span class="text-xs font-semibold uppercase tracking-wider">${envBannerText}<#if envBannerNote?has_content> &middot; ${envBannerNote}</#if></span>
           </div>
         </#if>
 
